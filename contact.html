@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- linking css file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url('contact2.jpg');
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+        }
+        .card {
+            width: 200px; /* Set the width and height to the same value */
+            height: 200px; /* Set the width and height to the same value */
+            border-radius: 50%; /* Make the card circular */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .card-body p {
+            margin-top: 10px; /* Add some space between the icon and the text */
+        }
+
+        .card-body:hover .fa {
+            color: yellow; /* Change the color to yellow on hover */
+        }
+
+        body {
+            padding-bottom: 100px; /* Add padding to the bottom of the body */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbarScroll navbar-dark bg-black">
+        <div class="container">
+           <a class="navbar-brand" href="#"><h4>Tasfia Tahsin Annita</h4> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/interest.html">Interests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/skills.html">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/education.html">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact.html">Contacts</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section id="Skills" class="mt-5 mb-5"> <!-- Add mb-5 class for bottom margin -->
+        <div class="container">
+            <br>
+        
+            <h1 class="text-center" style="font-size: 100px;">Contact me</h1>
+            
+            <div class="container text-center">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 mt-4 d-flex justify-content-center align-items-center">
+                        <img src="mecircle.png" style="max-width: 500px; width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center"> <!-- Align the row content to center -->
+                <div class="col-lg-2 mt-4 d-flex justify-content-center align-items-center">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <a href="mailto:tasfiatahsinannita@gmail.com">
+                                <i class="fas servicesIcon fa-envelope fa-6x"></i> <!-- Mail icon -->
+                            </a>
+                            <h4>Mail</h4> 
+                        </div>
+                    </div>   
+                </div>
+                <div class="col-lg-2 mt-4 d-flex justify-content-center align-items-center">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <a href="01733522836">
+                                <i class="fas servicesIcon fa-phone fa-6x"></i> <!-- Phone icon -->
+                            </a>
+                            <h4>Phone</h4> 
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-lg-2 mt-4 d-flex justify-content-center align-items-center">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <a href="https://www.linkedin.com/in/tasfia-tahsin-annita-462177226/">
+                                <i class="fab servicesIcon fa-linkedin fa-6x"></i> <!-- LinkedIn icon -->
+                            </a>
+                            <h4>linkedin</h4> 
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-lg-2 mt-4 d-flex justify-content-center align-items-center">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <a href="https://github.com/AnnitaTahsinn">
+                                <i class="fab servicesIcon fa-github fa-6x"></i> <!-- GitHub icon -->
+                            </a>
+                            <h4>GitHub</h4> 
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-lg-2 mt-4 d-flex justify-content-center align-items-center">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <a href="https://www.instagram.com/atinnalachesis/">
+                                <i class="fab servicesIcon fa-instagram fa-6x"></i> <!-- Instagram icon -->
+                            </a>
+                            <h4>Instagram</h4> 
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
