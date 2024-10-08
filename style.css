@@ -1,7 +1,7 @@
 /* hero background image */
 .bgimage {
     height:100vh;
-    background: url('/background.jpg');
+    background: url('background.jpg');
     background-size:cover;
     position:relative;
 }
@@ -27,7 +27,7 @@
 }
 .bghobby {
     height:100vh;
-    background: url('/bghobby.avif');
+    background: url('bghobby.avif');
     background-size:cover;
     position:relative;
 }
