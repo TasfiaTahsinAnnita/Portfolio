@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tasfia Tahsin Annita's Portfolio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -59,47 +61,97 @@
             opacity: 0.5;
         }
 
-        /* Welcome Title */
-        #welcome-title {
-            position: absolute;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2.6rem;
-            color: #50fa7b;
-            text-align: center;
-            text-shadow: 0 0 15px rgba(80, 250, 123, 0.8);
-            z-index: 20;
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-        }
-
-        /* Floating Hero Avatar */
+        /* Floating Cyber Logo 'TASFIA TAHSIN ANNITA' */
         #hero-avatar {
             position: absolute;
-            top: 28%;
+            top: 35%;
+            /* Moved up from 50% to avoid overlap with gates */
             left: 50%;
-            transform: translateX(-50%);
-            font-size: 130px;
-            opacity: 0.12;
-            z-index: 10;
+            transform: translate(-50%, -50%);
+            width: auto;
+
+            /* Logo Container Flex */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0.2;
+            z-index: 1;
             pointer-events: none;
-            animation: float 6s infinite ease-in-out;
+            animation: floatLogo 6s ease-in-out infinite;
         }
 
-        @keyframes float {
+        #hero-avatar::before {
+            content: 'TASFIA\A TAHSIN\A ANNITA';
+            /* Stacked Name */
+            white-space: pre;
+            /* Enable line breaks */
+            text-align: center;
+            line-height: 1.1;
+
+            /* Strict Local Font Stack */
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            font-size: 8rem;
+            /* Reduced size for 3 lines */
+            font-weight: 900;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+
+            /* Gradient Text Fill */
+            background: linear-gradient(180deg, #fff 0%, #50fa7b 50%, #bd93f9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            filter: drop-shadow(0 0 20px rgba(80, 250, 123, 0.5));
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Reflection Effect */
+        #hero-avatar::after {
+            content: 'TASFIA\A TAHSIN\A ANNITA';
+            white-space: pre;
+            text-align: center;
+            line-height: 1.1;
+
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            font-size: 8rem;
+            font-weight: 900;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+
+            position: absolute;
+            top: 85%;
+            /* Moved down to account for height */
+            left: 0;
+            right: 0;
+            /* Center horizontal */
+            margin: auto;
+
+            transform: scaleY(-0.5);
+            opacity: 0.3;
+
+            background: linear-gradient(180deg, transparent 40%, #50fa7b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: blur(4px);
+        }
+
+        @keyframes floatLogo {
 
             0%,
             100% {
-                transform: translate(-50%, 0);
+                transform: translate(-50%, -50%);
             }
 
             50% {
-                transform: translate(-50%, -20px);
+                transform: translate(-50%, -55%);
             }
         }
 
+        /* Removed rotation animation */
         #game-world {
             position: absolute;
             top: 0;
@@ -463,6 +515,35 @@
             color: white;
         }
     </style>
+    <style>
+        /* @import removed to ensure 0 external links */
+
+        /* ... existing styles ... */
+
+        /* Icon Styling for SVGs */
+        .gate svg {
+            width: 50px;
+            height: 50px;
+            fill: none;
+            /* No fill for outline style */
+            stroke: #ffffff;
+            /* White stroke */
+            stroke-width: 2.5;
+            /* Wireframe look */
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .gate:hover svg {
+            transform: scale(1.1);
+            stroke: #ff79c6;
+            /* Pink neon stroke on hover */
+            filter: drop-shadow(0 0 10px #ff79c6);
+        }
+    </style>
 </head>
 
 <body>
@@ -470,52 +551,78 @@
     <div id="world-container">
         <div id="parallax-bg"></div>
         <div id="decor-bg"></div>
-        <h1 id="welcome-title">Welcome to Tasfia Tahsin Annita's Portfolio</h1>
-        <div id="hero-avatar">🧑‍💻</div>
+        <div id="hero-avatar"></div>
 
         <div id="game-world">
             <div id="ground"></div>
-            <div id="avatar">🧑‍💻</div>
+            <div id="avatar"></div>
 
             <!-- GATES -->
             <div class="gate" data-modal="about" style="left: 500px;">
                 <div>
-                    <div>🚪</div>
+                    <!-- User Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
                 </div>
                 <div class="gate-label">ABOUT ME</div>
             </div>
 
             <div class="gate" data-modal="education" style="left: 850px;">
                 <div>
-                    <div>🎓</div>
+                    <!-- Book / Education Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
                 </div>
                 <div class="gate-label">EDUCATION</div>
             </div>
 
             <div class="gate" data-modal="experience" style="left: 1200px;">
                 <div>
-                    <div>💼</div>
+                    <!-- Briefcase Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
                 </div>
                 <div class="gate-label">EXPERIENCE</div>
             </div>
 
             <div class="gate" data-modal="projects" style="left: 1550px;">
                 <div>
-                    <div>🧪</div>
+                    <!-- Code / Terminal Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
                 </div>
                 <div class="gate-label">PROJECTS</div>
             </div>
 
             <div class="gate" data-modal="publications" style="left: 1900px;">
                 <div>
-                    <div>📚</div>
+                    <!-- File Text Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
                 </div>
                 <div class="gate-label">PUBLICATIONS</div>
             </div>
 
             <div class="gate" data-modal="contact" style="left: 2250px;">
                 <div>
-                    <div>📧</div>
+                    <!-- Mail Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
                 </div>
                 <div class="gate-label">CONTACT</div>
             </div>
