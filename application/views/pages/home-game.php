@@ -516,32 +516,381 @@
         }
     </style>
     <style>
-        /* @import removed to ensure 0 external links */
-
-        /* ... existing styles ... */
-
         /* Icon Styling for SVGs */
         .gate svg {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            /* Smaller icons as requested */
+            height: 30px;
             fill: none;
-            /* No fill for outline style */
-            stroke: #ffffff;
-            /* White stroke */
-            stroke-width: 2.5;
-            /* Wireframe look */
+            stroke: var(--icon-stroke);
+            stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
             z-index: 2;
             transition: all 0.3s ease;
         }
 
         .gate:hover svg {
+            transform: scale(1.2);
+            stroke: var(--accent-color);
+            filter: drop-shadow(0 0 10px var(--accent-color));
+        }
+
+        /* Stranger Things Theme Overrides */
+        [data-theme="stranger"] body {
+            /* The Upside Down Atmosphere */
+            background: linear-gradient(to bottom, #09090b 0%, #1a0505 100%);
+        }
+
+        /* Ground: Veins of Vecna - improved */
+        [data-theme="stranger"] #ground {
+            background-image: url('<?= base_url("assets/veins.svg") ?>');
+            background-size: 400px 100px;
+            /* Stretch to match aspect ratio of SVG */
+            background-color: #050000;
+            border-top: none;
+            /* Seamless blend */
+            box-shadow: 0 -20px 60px rgba(0, 0, 0, 1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            opacity: 1;
+            /* Blend mode to make it look embedded */
+            mix-blend-mode: normal;
+        }
+
+        /* Remove the broken 'slime' top layer */
+        [data-theme="stranger"] #ground::after {
+            display: none;
+        }
+
+        /* Portals: Authentic Organic Rifts */
+        /* Based on the reference: amorphous, dark, red-glowing mass */
+        [data-theme="stranger"] .gate>div:first-child {
+            width: 100px;
+            /* Wider base */
+            height: 140px;
+            border: none;
+
+            /* Amorphous biological shape */
+            border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+
+            /* Deep dark red core */
+            background: radial-gradient(circle at 40% 40%, #ff4d4d 0%, #300 40%, #000 90%);
+
+            /* Heavy Atmosphere Glow */
+            box-shadow:
+                0 0 30px rgba(255, 0, 0, 0.4),
+                0 0 10px rgba(255, 0, 0, 0.6) inset;
+
+            /* Living animation */
+            animation: amorphousPulse 6s ease-in-out infinite alternate;
+        }
+
+        [data-theme="stranger"] .gate:hover>div:first-child {
+            background: radial-gradient(ellipse at center, #fff 0%, #ff4d4d 40%, #800000 80%);
+            box-shadow: 0 0 60px #ff0000, 0 0 100px #ff0000;
+            transform: scale(1.05);
+        }
+
+        /* Bright Red Labels for Stranger Theme */
+        [data-theme="stranger"] .gate-label {
+            color: #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* --- Stranger Things Modal Theme --- */
+        [data-theme="stranger"] .modal-content {
+            background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+            border: 2px solid #500;
+            box-shadow: 0 0 30px #800000, inset 0 0 50px #000;
+            color: #ffcccc;
+        }
+
+        [data-theme="stranger"] .modal-header {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+            border-bottom: 1px solid #500;
+            padding-bottom: 15px;
+        }
+
+        [data-theme="stranger"] .btn-exit {
+            background: #300;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            box-shadow: 0 0 10px #500;
+            transition: all 0.3s;
+        }
+
+        [data-theme="stranger"] .btn-exit:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        [data-theme="stranger"] .project-card {
+            background: rgba(40, 0, 0, 0.6);
+            border-left: 3px solid #ff0000;
+        }
+
+        [data-theme="stranger"] a {
+            color: #ff4d4d;
+        }
+
+        @keyframes amorphousPulse {
+            0% {
+                border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+            }
+
+            33% {
+                border-radius: 40% 60% 34% 66% / 45% 68% 32% 55%;
+            }
+
+            66% {
+                border-radius: 73% 27% 64% 36% / 65% 38% 62% 35%;
+            }
+
+            100% {
+                border-radius: 53% 47% 44% 56% / 45% 58% 42% 55%;
+            }
+        }
+
+        /* Decor: Floating Ash / Spores */
+        [data-theme="stranger"] #decor-bg {
+            background-image:
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+            background-size: 50px 50px, 100px 100px;
+            background-position: 0 0, 20px 20px;
+            animation: ashFall 15s linear infinite;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Decor: Floating Ash / Spores */
+        [data-theme="stranger"] #decor-bg {
+            background-image:
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+            background-size: 50px 50px, 100px 100px;
+            background-position: 0 0, 20px 20px;
+            animation: ashFall 15s linear infinite;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes ashFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(200px) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* CSS Variables for Theming */
+        :root {
+            /* Cyberpunk (Default) */
+            --bg-color: #0c0c16;
+            --text-color: #e0e0ff;
+            --primary-color: #50fa7b;
+            /* Neon Green */
+            --secondary-color: #bd93f9;
+            /* Purple */
+            --accent-color: #ff79c6;
+            /* Pink */
+            --portal-gradient: radial-gradient(circle at 50% 50%, #000 20%, #2d1b4e 60%, #4c1d95 100%);
+            --portal-border: rgba(189, 147, 249, 0.6);
+            --font-logo: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            --logo-gradient: linear-gradient(180deg, #fff 0%, #50fa7b 50%, #bd93f9 100%);
+            --ground-border: 4px solid #50fa7b;
+            --ground-shadow: 0 -5px 15px rgba(80, 250, 123, 0.4);
+            --icon-stroke: #ffffff;
+            --logo-stroke: #50fa7b;
+        }
+
+        /* Stranger Things Theme */
+        [data-theme="stranger"] {
+            --bg-color: #050000;
+            --text-color: #ffcccc;
+            --primary-color: #ff0000;
+            /* Red */
+            --secondary-color: #800000;
+            /* Dark Red */
+            --accent-color: #ff0000;
+            --portal-gradient: radial-gradient(circle at 50% 50%, #000 20%, #4a0000 60%, #800000 100%);
+            --portal-border: rgba(255, 0, 0, 0.6);
+            --font-logo: 'Georgia', 'Times New Roman', serif;
+            /* Serif for Stranger Things look */
+            --logo-gradient: linear-gradient(180deg, #ff0000 0%, #000 100%);
+            /* Solid Red-ish with stroke */
+            --ground-border: 4px solid #ff0000;
+            --ground-shadow: 0 -5px 25px rgba(255, 0, 0, 0.6);
+            --icon-stroke: #ff9999;
+            --logo-stroke: #ff0000;
+        }
+
+        /* Apply Variables */
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        /* Update Logo to use Variables */
+        #hero-avatar::before,
+        #hero-avatar::after {
+            font-family: var(--font-logo);
+            /* Handle gradient slightly differently for ST theme via variables */
+            background: var(--logo-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-stroke: 2px var(--logo-stroke);
+            filter: drop-shadow(0 0 20px var(--primary-color));
+        }
+
+        /* If Stranger Theme: Dark Fill with Bright Red Border */
+        [data-theme="stranger"] #hero-avatar::before,
+        [data-theme="stranger"] #hero-avatar::after {
+            background: none;
+            color: #2a0000;
+            /* Dark Blood Fill */
+            -webkit-text-stroke: 3px #ff0000;
+            /* Bright Red Border */
+            text-shadow:
+                0 0 10px rgba(255, 0, 0, 0.5),
+                0 0 30px rgba(255, 0, 0, 0.3);
+            opacity: 1;
+        }
+
+        /* Stranger Things Theme Overrides */
+        [data-theme="stranger"] body {
+            /* The Upside Down Atmosphere */
+            background: linear-gradient(to bottom, #09090b 0%, #1a0505 100%);
+        }
+
+        /* Ground: Veins of Vecna - improved */
+        [data-theme="stranger"] #ground {
+            background-image: url('<?= base_url("assets/veins.svg") ?>');
+            background-size: 400px 200px;
+            /* Wider stretch to match reference scale */
+            background-color: transparent;
+            /* Deep black base */
+            border-top: none;
+            /* Red glow coming appearing from the fog */
+            box-shadow:
+                inset 0 0 50px #000,
+                0 -10px 30px rgba(255, 0, 0, 0.6);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            opacity: 1;
+            transform-origin: bottom;
+            transform: scaleY(1.0);
+        }
+
+        /* Remove the broken 'slime' top layer */
+        [data-theme="stranger"] #ground::after {
+            display: none;
+        }
+
+        /* Portals: Authentic Organic Rifts */
+        /* ... existing styles ... */
+        .gate>div:first-child {
+            background: var(--portal-gradient);
+            border: 4px solid var(--portal-border);
+            box-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color) inset;
+        }
+
+        .gate svg {
+            stroke: var(--icon-stroke);
+        }
+
+        .gate:hover svg {
             transform: scale(1.1);
-            stroke: #ff79c6;
+            stroke: var(--accent-color);
             /* Pink neon stroke on hover */
-            filter: drop-shadow(0 0 10px #ff79c6);
+            filter: drop-shadow(0 0 10px var(--accent-color));
+        }
+
+        .gate:hover>div:first-child,
+        .gate.active>div:first-child {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 30px var(--accent-color), 0 0 50px var(--secondary-color) inset;
+        }
+
+        /* Update Ground */
+        #ground {
+            border-top: var(--ground-border);
+            box-shadow: var(--ground-shadow);
+        }
+
+        /* Particle override for stranger theme to look like ash? */
+        [data-theme="stranger"] #decor-bg {
+            background:
+                radial-gradient(circle, rgba(255, 0, 0, 0.2) 2px, transparent 2px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 200px 200px;
+            animation: ashFall 20s linear infinite;
+        }
+
+        @keyframes ashFall {
+            from {
+                background-position: 0 0, 0 0;
+            }
+
+            to {
+                background-position: 0 500px, 100px 500px;
+            }
         }
     </style>
 </head>
@@ -549,6 +898,7 @@
 <body>
 
     <div id="world-container">
+        <button id="theme-toggle" onclick="toggleTheme()">SWITCH REALM</button>
         <div id="parallax-bg"></div>
         <div id="decor-bg"></div>
         <div id="hero-avatar"></div>
@@ -892,6 +1242,18 @@
         }
     </script>
 
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+
+            if (currentTheme === 'stranger') {
+                body.setAttribute('data-theme', 'cyber');
+            } else {
+                body.setAttribute('data-theme', 'stranger');
+            }
+        }
+    </script>
 </body>
 
 </html>
