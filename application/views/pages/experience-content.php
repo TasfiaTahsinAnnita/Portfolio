@@ -1,7 +1,8 @@
 <div class="project-card">
-    <h3>🏦 ICT Intern (Expected)</h3>
-    <p><strong>Community Bank Bangladesh PLC</strong> | Dhaka, Bangladesh<br>
-    <em>Oct 2025 – Present</em></p>
+    <h3>🏦 ICT Intern (Current)</h3>
+    <p><strong>Community Bank Bangladesh PLC.</strong> | Dhaka, Bangladesh<br>
+        <em>December 2025 – Present</em>
+    </p>
     <ul>
         <li>Supporting digital transformation through data analysis, automation, and system support.</li>
         <li>Applying Python and technical skills to optimize banking workflows.</li>
@@ -12,7 +13,8 @@
 <div class="project-card">
     <h3>🎓 Undergraduate Teaching Assistant (Completed)</h3>
     <p><strong>East West University</strong> | Dhaka, Bangladesh<br>
-    <em>Jun 2024 – Sep 2025</em></p>
+        <em>June 2024 – September 2025</em>
+    </p>
     <ul>
         <li>Supported course delivery and lab coordination for CSE programs.</li>
         <li>Acted as liaison between students and faculty for academic and research support.</li>
