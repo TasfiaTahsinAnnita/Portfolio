@@ -1,13 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Portfolio extends CI_Controller {
+class Portfolio extends CI_Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $data['zones']['about']        = $this->load->view('pages/about-content', '', TRUE);
         $data['zones']['experience']   = $this->load->view('pages/experience-content', '', TRUE);
         $data['zones']['my_projects']  = $this->load->view('pages/my-projects-content', '', TRUE);
         $data['zones']['publications'] = $this->load->view('pages/publications-content', '', TRUE);
+        $data['zones']['education']    = $this->load->view('pages/education-content', '', TRUE);
         $data['zones']['contact']      = $this->load->view('pages/contact-content', '', TRUE);
         $this->load->view('layouts/main', [
             'page' => 'pages/home-game',
@@ -15,7 +18,8 @@ class Portfolio extends CI_Controller {
         ]);
     }
 
-    public function download_resume() {
+    public function download_resume()
+    {
         $this->load->helper('download');
         $file = FCPATH . 'assets/resume/tasfiatahsin_annita_cv.pdf';
         if (file_exists($file)) {
@@ -25,7 +29,8 @@ class Portfolio extends CI_Controller {
         }
     }
 
-    public function send_message() {
+    public function send_message()
+    {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
