@@ -892,6 +892,93 @@
                 background-position: 0 500px, 100px 500px;
             }
         }
+
+        /* Mobile Responsiveness & Touch Controls */
+        #touch-controls {
+            display: none;
+            /* Hidden on desktop */
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 20px;
+            justify-content: space-between;
+            pointer-events: none;
+            /* Let touches pass through container */
+            z-index: 1000;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 15px;
+            pointer-events: auto;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .control-btn:active {
+            background: rgba(80, 250, 123, 0.4);
+            transform: scale(0.95);
+        }
+
+        .control-btn.jump-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(189, 147, 249, 0.3);
+            border-color: rgba(189, 147, 249, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            #touch-controls {
+                display: flex;
+            }
+
+            #hero-avatar::before,
+            #hero-avatar::after {
+                font-size: 3rem;
+                /* Smaller logo */
+                letter-spacing: 5px;
+            }
+
+            #hero-avatar {
+                width: 100%;
+                top: 25%;
+                /* Move up a bit */
+            }
+
+            #instruction {
+                font-size: 0.8rem;
+                width: 90%;
+                top: 80px;
+            }
+
+            /* Adjust modal size */
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+                padding: 1rem;
+            }
+
+            /* Stranger things mobile overrides */
+            [data-theme="stranger"] #hero-avatar::before {
+                -webkit-text-stroke: 1px #ff0000;
+            }
+        }
     </style>
 </head>
 
@@ -977,7 +1064,18 @@
                 <div class="gate-label">CONTACT</div>
             </div>
         </div>
-        <div id="instruction">Use ← → to walk | SPACE/↑ to jump | ENTER near gate to enter</div>
+        <div id="instruction">Use ← → to walk | SPACE/↑ to jump | 'E' or ENTER to enter gate</div>
+
+        <!-- Touch Controls for Mobile -->
+        <div id="touch-controls">
+            <div class="control-group">
+                <div id="btn-left" class="control-btn">←</div>
+                <div id="btn-right" class="control-btn">→</div>
+            </div>
+            <div class="control-group">
+                <div id="btn-action" class="control-btn jump-btn">↑</div>
+            </div>
+        </div>
     </div>
 
     <!-- MODALS -->
@@ -1139,7 +1237,7 @@
                     keys[key] = true;
                 }
 
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' || e.key === 'e' || e.key === 'E') {
                     gates.forEach(gate => {
                         const gateLeft = parseInt(gate.style.left, 10);
                         if (Math.abs(avatarX - gateLeft) < 80 && avatarY <= 100) {
@@ -1207,6 +1305,58 @@
 
             // Start the loop
             gameLoop();
+
+            // Touch Controls Support
+            const btnLeft = document.getElementById('btn-left');
+            const btnRight = document.getElementById('btn-right');
+            const btnAction = document.getElementById('btn-action');
+
+            if (btnLeft && btnRight && btnAction) {
+                const addTouch = (el, code) => {
+                    const press = (e) => {
+                        // Prevent default to stop scrolling/zooming/mouse emulation
+                        if (e.cancelable) e.preventDefault();
+
+                        // Handle Jump/Enter specific logic
+                        if (code === 'Space') {
+                            // Check for interaction (Enter) first
+                            let interacted = false;
+                            gates.forEach(gate => {
+                                const gateLeft = parseInt(gate.style.left, 10);
+                                if (Math.abs(avatarX - gateLeft) < 80 && avatarY <= 100) {
+                                    openModal(gate.dataset.modal);
+                                    interacted = true;
+                                }
+                            });
+
+                            if (!interacted) {
+                                // Just Jump
+                                keys['Space'] = true;
+                            }
+                        } else {
+                            keys[code] = true;
+                        }
+                    };
+                    const release = (e) => {
+                        if (e.cancelable) e.preventDefault();
+                        keys[code] = false;
+                    };
+
+                    el.addEventListener('touchstart', press, {
+                        passive: false
+                    });
+                    el.addEventListener('touchend', release, {
+                        passive: false
+                    });
+                    el.addEventListener('mousedown', press);
+                    el.addEventListener('mouseup', release);
+                    el.addEventListener('mouseleave', release);
+                };
+
+                addTouch(btnLeft, 'ArrowLeft');
+                addTouch(btnRight, 'ArrowRight');
+                addTouch(btnAction, 'Space');
+            }
 
             const form = document.getElementById('contact-form');
             if (form) {
